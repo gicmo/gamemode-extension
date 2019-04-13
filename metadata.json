@@ -1,0 +1,5 @@
+{"name": "GameMode",
+ "description": "GameMode indicator",
+ "uuid": "gamemode@christian.kellner.me",
+ "shell-version": ["3.32", "3.30"]
+}
