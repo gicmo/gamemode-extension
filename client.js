@@ -31,18 +31,13 @@ const GameModeClientInterface = '<node> \
 </node>';
 
 
-const GameModeClientProxy = Gio.DBusProxy.makeProxyWrapper(GameModeClientInterface);
-
-/*  */
-
 const GAMEMODE_DBUS_NAME = 'com.feralinteractive.GameMode';
 const GAMEMODE_DBUS_IFACE = 'com.feralinteractive.GameMode';
 const GAMEMODE_DBUS_PATH = '/com/feralinteractive/GameMode';
 
-var Client = new Lang.Class({
-    Name: 'GameModeClient',
+var Client = class {
 
-    _init(readyCallback) {
+   constructor(readyCallback) {
 	this._readyCallback = readyCallback;
 	this._proxy = null;
 
@@ -57,7 +52,7 @@ var Client = new Lang.Class({
                           this._onProxyReady.bind(this));
 
 	this.client_count = 0;
-    },
+    }
 
     _onProxyReady(o, res) {
 
@@ -67,7 +62,7 @@ var Client = new Lang.Class({
 	    log('error creating GameMode proxy: %s'.format(e.message));
             return;
         }
-	log('gamemode: proxy ready');
+
 	this._propsChangedId = this._proxy.connect('g-properties-changed', this._onPropertiesChanged.bind(this));
 
 	if (this._readyCallback)
@@ -76,7 +71,7 @@ var Client = new Lang.Class({
 	this.client_count = this._proxy.ClientCount;
 	if (this.client_count > 0)
 	    this.emit('state-changed', true);
-    },
+    }
 
     _onPropertiesChanged(proxy, properties) {
         let unpacked = properties.deep_unpack();
@@ -87,10 +82,10 @@ var Client = new Lang.Class({
 	this.client_count = this._proxy.ClientCount;
 
 	let after_on = this.client_count > 0;
-	log ("gamemode: before " + before_on + " " + after_on);
+
 	if (before_on != after_on)
 	    this.emit('state-changed', after_on);
-    },
+    }
 
     /* public methods */
     close() {
@@ -101,13 +96,13 @@ var Client = new Lang.Class({
 
 	this._proxy.disconnect(this._propsChangedId);
 	this._proxy = null;
-    },
+    }
 
     get clientCount () {
         return this._proxy.ClientCount;
     }
 
-});
+};
 
 Signals.addSignalMethods(Client.prototype);
 
