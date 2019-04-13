@@ -18,9 +18,11 @@
  *       Christian J. Kellner <christian@kellner.me>
  */
 
+const Clutter = imports.gi.Clutter;
 const Extension = imports.misc.extensionUtils.getCurrentExtension();
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const GObject = imports.gi.GObject;
 const Lang = imports.lang;
 const Main = imports.ui.main;
 const MessageTray = imports.ui.messageTray;
@@ -33,13 +35,23 @@ const Shell = imports.gi.Shell;
 const GameMode = Extension.imports.client;
 
 /* ui */
-var GameModeIndicator = class extends PanelMenu.SystemIndicator {
+var GameModeIndicator = GObject.registerClass(
+class GameModeIndicator extends PanelMenu.Button {
 
-    constructor() {
-        super();
+    _init() {
+        super._init(0.0, "GameMode");
+	this.connect('destroy', this._onDestroy.bind(this));
 
-        this._indicator = this._addIndicator();
-	this._indicator.icon_name = 'night-light-symbolic';
+        let box = new St.BoxLayout({ style_class: 'panel-status-menu-box' });
+
+	let icon = new St.Icon({
+            icon_name: 'applications-games-symbolic',
+	    style_class: 'system-status-icon'
+        });
+
+	this._icon = icon;
+        box.add_child(icon);
+        this.actor.add_child(box);
 
 	this._signals = [];
 
@@ -50,7 +62,10 @@ var GameModeIndicator = class extends PanelMenu.SystemIndicator {
         this._sync();
 
 	this._source = null;
-	this._indicator.connect('destroy', this._onDestroy.bind(this));
+
+	let red = Clutter.Color.get_static(Clutter.StaticColor.RED);
+	this._color_effect = new Clutter.ColorizeEffect({tint: red});
+
 	log('GameMode extension initialized');
     }
 
@@ -88,20 +103,23 @@ var GameModeIndicator = class extends PanelMenu.SystemIndicator {
     /* Session callbacks */
     _sync() {
         let active = !Main.sessionMode.isLocked && !Main.sessionMode.isGreeter;
-	this._indicator.visible = active;
+	this.actor.visible = active;
     }
 
     /* GameMode.Client callbacks */
     _onStateChanged(cli, is_on) {
-	if (is_on)
+	if (is_on) {
 	    this._notify("GameMode On", "Computer performance optimized for playing game");
-	else
+	    this._icon.add_effect_with_name('color', this._color_effect);
+	} else {
 	    this._notify("GameMode Off", "Computer performace reset for normal use");
+	    this._icon.remove_effect_by_name('color');
+	}
 
         this._sync();
     }
 
-};
+});
 
 /* entry points */
 
@@ -115,7 +133,7 @@ function enable() {
 	return;
 
     indicator = new GameModeIndicator();
-    Main.panel.statusArea.aggregateMenu._indicators.insert_child_at_index(indicator.indicators, 0);
+    Main.panel.addToStatusArea('GameMode', indicator);
 }
 
 function disable() {
