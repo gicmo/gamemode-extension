@@ -109,10 +109,10 @@ class GameModeIndicator extends PanelMenu.Button {
     /* GameMode.Client callbacks */
     _onStateChanged(cli, is_on) {
 	if (is_on) {
-	    this._notify("GameMode On", "Computer performance optimized for playing game");
+	    this._notify("GameMode Activated", "Computer performance is now optimized for playing game");
 	    this._icon.add_effect_with_name('color', this._color_effect);
 	} else {
-	    this._notify("GameMode Off", "Computer performace reset for normal use");
+	    this._notify("GameMode Off", "Computer performance is reset for normal use");
 	    this._icon.remove_effect_by_name('color');
 	}
 
