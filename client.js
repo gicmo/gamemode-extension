@@ -69,8 +69,10 @@ var Client = class {
 	    this._readyCallback(this);
 
 	this.client_count = this._proxy.ClientCount;
-	if (this.client_count > 0)
+	if (this.client_count > 0) {
 	    this.emit('state-changed', true);
+	    this.emit('count-changed', this.client_count)
+	}
     }
 
     _onPropertiesChanged(proxy, properties) {
@@ -78,6 +80,7 @@ var Client = class {
         if (!('ClientCount' in unpacked))
 	    return;
 
+	let before_n = this.client_count;
 	let before_on = this.client_count > 0;
 	this.client_count = this._proxy.ClientCount;
 
@@ -85,6 +88,9 @@ var Client = class {
 
 	if (before_on != after_on)
 	    this.emit('state-changed', after_on);
+
+	if (before_n != this.client_count)
+	    this.emit('count-changed', this.client_count);
     }
 
     /* public methods */
