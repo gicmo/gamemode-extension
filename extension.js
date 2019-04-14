@@ -63,7 +63,7 @@ class GameModeIndicator extends PanelMenu.Button {
 
 	this._source = null;
 
-	let red = Clutter.Color.get_static(Clutter.StaticColor.RED);
+	let red = Clutter.Color.get_static(Clutter.StaticColor.GREEN);
 	this._color_effect = new Clutter.ColorizeEffect({tint: red});
 
 	log('GameMode extension initialized');
