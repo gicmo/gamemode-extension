@@ -27,6 +27,14 @@ const Signals = imports.signals;
 const GameModeClientInterface = '<node> \
   <interface name="com.feralinteractive.GameMode"> \
     <property name="ClientCount" type="i" access="read"></property> \
+    <method name="RegisterGame"> \
+      <arg type="i" name="pid" direction="in"> </arg> \
+      <arg type="i" name="status" direction="out"> </arg> \
+    </method> \
+    <method name="UnregisterGame"> \
+      <arg type="i" name="pid" direction="in"> </arg> \
+      <arg type="i" name="status" direction="out"> </arg> \
+    </method> \
   </interface> \
 </node>';
 
@@ -108,6 +116,29 @@ var Client = class {
         return this._proxy ? this._proxy.ClientCount : 0;
     }
 
+    registerGame(pid, callback) {
+	this._proxy.RegisterGameRemote(pid, (res, err) => {
+	    if (err) {
+		callback(-2, err);
+		return;
+	    }
+
+	    let [status] = res;
+	    callback(status, null);
+	});
+    }
+
+    unregisterGame(pid, callback) {
+	this._proxy.UnregisterGameRemote(pid, (res, err) => {
+	    if (err) {
+		callback(-2, err);
+		return;
+	    }
+
+	    let [status] = res;
+	    callback(status, null);
+	});
+    }
 };
 
 Signals.addSignalMethods(Client.prototype);
