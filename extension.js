@@ -35,6 +35,39 @@ const Shell = imports.gi.Shell;
 const GameMode = Extension.imports.client;
 
 /* ui */
+
+class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
+    constructor(client) {
+        super();
+        this._client = client;
+
+        this._label = new St.Label({ text: 'GameMode status: ', x_expand: true });
+        this.actor.add_child(this._label);
+
+        this._status = new St.Label({ text: '...', x_expand: false });
+        this.actor.add_child(this._status);
+
+        this._changedId = client.connect('state-changed',
+					 this._onStateChanged.bind(this));
+	this._onStateChanged(this._client, this._client.clientCount > 0);
+    }
+
+    destroy() {
+        if (this._changedId) {
+            this._client.disconnect(this._changedId);
+            this._changedId = 0;
+        }
+
+        super.destroy();
+    }
+
+    _onStateChanged(cli, is_on) {
+	this._status.text = is_on ? "on" : "off";
+    }
+}
+
+
+/* main button */
 var GameModeIndicator = GObject.registerClass(
 class GameModeIndicator extends PanelMenu.Button {
 
@@ -65,6 +98,10 @@ class GameModeIndicator extends PanelMenu.Button {
 
 	let red = Clutter.Color.get_static(Clutter.StaticColor.GREEN);
 	this._color_effect = new Clutter.ColorizeEffect({tint: red});
+
+	/* the menu */
+	this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+	this.menu.addMenuItem(new StatusMenuItem(this._client));
 
 	log('GameMode extension initialized');
     }
