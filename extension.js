@@ -99,6 +99,49 @@ class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 }
 
+class ActivatorMenuItem extends PopupMenu.PopupSwitchMenuItem {
+    constructor(client) {
+        super("Force GameMode", false);
+        this._client = client;
+	this.active = false;
+
+	let credentials = new Gio.Credentials();
+	this._pid = credentials.get_unix_pid();
+
+	this._toggleId = this.connect('toggled', this._toggle.bind(this));
+    }
+
+    destroy() {
+	if (this._toggleId) {
+            this._client.disconnect(this._toggleId);
+            this._toggleId = 0;
+        }
+        super.destroy();
+    }
+
+    _toggle() {
+	this.setStatus("…");
+	if (this.active) {
+	    this._client.unregisterGame(this._pid, this._onToggleDone.bind(this));
+	} else {
+	    this._client.registerGame(this._pid, this._onToggleDone.bind(this));
+	}
+    }
+
+    _onToggleDone(status, error) {
+	if (error || status < 0) {
+	    /* TODO: notification  */
+	    log("could not toggle GameMode: " + status + " " + error);
+	    return;
+	}
+
+	this.active = !this.active;
+	this.setToggletate(this.active);
+	this.setStatus(null);
+    }
+
+}
+
 /* main button */
 var GameModeIndicator = GObject.registerClass(
 class GameModeIndicator extends PanelMenu.Button {
@@ -135,6 +178,8 @@ class GameModeIndicator extends PanelMenu.Button {
 	this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 	this.menu.addMenuItem(new StatusMenuItem(this._client));
 	this.menu.addMenuItem(new ClientCountMenuItem(this._client));
+	this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
+	this.menu.addMenuItem(new ActivatorMenuItem(this._client));
 
 	log('GameMode extension initialized');
     }
