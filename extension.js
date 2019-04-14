@@ -66,6 +66,38 @@ class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 }
 
+class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
+    constructor(client) {
+        super();
+        this._client = client;
+
+        this._status = new St.Label({ text: 'GameMode status: ', x_expand: true });
+        this.actor.add_child(this._status);
+
+        this._changedId = client.connect('count-changed',
+					 this._onCountChanged.bind(this));
+	this._onCountChanged(this._client, this._client.clientCount);
+    }
+
+    destroy() {
+        if (this._changedId) {
+            this._client.disconnect(this._changedId);
+            this._changedId = 0;
+        }
+
+        super.destroy();
+    }
+
+    _onCountChanged(cli, count) {
+	if (count > 0) {
+	    this._status.text = count + " active clients";
+	} else if (count == 1) {
+	    this._status.text = "1 active client";
+	} else {
+	    this._status.text = "No active clients";
+	}
+    }
+}
 
 /* main button */
 var GameModeIndicator = GObject.registerClass(
@@ -102,6 +134,7 @@ class GameModeIndicator extends PanelMenu.Button {
 	/* the menu */
 	this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
 	this.menu.addMenuItem(new StatusMenuItem(this._client));
+	this.menu.addMenuItem(new ClientCountMenuItem(this._client));
 
 	log('GameMode extension initialized');
     }
