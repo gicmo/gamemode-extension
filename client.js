@@ -99,7 +99,7 @@ var Client = class {
     }
 
     get clientCount () {
-        return this._proxy.ClientCount;
+        return this._proxy ? this._proxy.ClientCount : 0;
     }
 
 };
