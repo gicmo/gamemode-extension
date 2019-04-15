@@ -1,0 +1,7 @@
+{"name": "GameMode",
+ "description": "GameMode indicator",
+ "uuid": "@UUID@",
+ "shell-version": ["3.32", "3.30"],
+ "version": "@VERSION@",
+ "original-author": "ckellner@redhat.com"
+}
