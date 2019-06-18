@@ -16,7 +16,7 @@ ninja -C$builddir install
 
 # extract names from metadata.json
 uuid=`(jq -r .uuid "$builddir/metadata.json")`
-name=`(jq -r .extension_id "$builddir/metadata.json")`
+name=`(jq -r '."extension-id"' "$builddir/metadata.json")`
 
 zipname="$uuid.shell-extension.zip"
 
