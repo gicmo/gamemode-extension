@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<schemalist gettext-domain="gamemode-extensions">
+  <schema path="/org/gnome/shell/extensions/gamemode/" id="org.gnome.shell.extensions.gamemode">
+    <key type="b" name="emit-notifications">
+      <default>true</default>
+      <summary>Emit notifications</summary>
+      <description>Notify when the global GameMode status changes.</description>
+    </key>
+  </schema>
+</schemalist>

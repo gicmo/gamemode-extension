@@ -1,6 +1,6 @@
 project('gamemode-extension',
 	version: '0.1',
-	meson_version: '>= 0.44.0',
+	meson_version: '>= 0.46.0',
 	license: 'GPL2+' )
 
 # our identity
@@ -12,6 +12,7 @@ i18n = import('i18n')
 
 # dirs
 srcdir = meson.source_root()
+prefix = get_option('prefix')
 datadir = get_option('datadir')
 
 shelldir = join_paths(datadir, 'gnome-shell')
@@ -57,6 +58,15 @@ sources = [
 install_data(
   sources + [md],
   install_dir: installdir)
+
+install_data(
+  'data/gschema.xml',
+  rename: 'org.gnome.shell.extensions.gamemode.gschema.xml',
+  install_dir: schemadir)
+
+meson.add_install_script(
+  'scripts/post-install.sh',
+  join_paths(prefix, schemadir))
 
 # tests
 if (js60.found())

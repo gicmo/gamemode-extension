@@ -19,7 +19,6 @@
  */
 
 const Clutter = imports.gi.Clutter;
-const Extension = imports.misc.extensionUtils.getCurrentExtension();
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
 const GObject = imports.gi.GObject;
@@ -31,6 +30,9 @@ const PopupMenu = imports.ui.popupMenu;
 const Signals = imports.signals;
 const St = imports.gi.St;
 const Shell = imports.gi.Shell;
+
+const ExtensionUtils = imports.misc.extensionUtils;
+const Extension = imports.misc.extensionUtils.getCurrentExtension();
 
 const GameMode = Extension.imports.client;
 
@@ -105,6 +107,8 @@ var GameModeIndicator = GObject.registerClass(
 
         _init() {
             super._init(0.0, "GameMode");
+            this._settings = ExtensionUtils.getSettings();
+
             this.connect('destroy', this._onDestroy.bind(this));
 
             let box = new St.BoxLayout({ style_class: 'panel-status-menu-box' });
@@ -179,11 +183,16 @@ var GameModeIndicator = GObject.registerClass(
         /* GameMode.Client callbacks */
         _onStateChanged(cli, is_on) {
             if (is_on) {
-                this._notify("GameMode Activated", "Computer performance is now optimized for playing game");
                 this._icon.add_effect_with_name('color', this._color_effect);
             } else {
-                this._notify("GameMode Off", "Computer performance is reset for normal use");
                 this._icon.remove_effect_by_name('color');
+            }
+
+            if (this._settings.get_boolean('emit-notifications')) {
+                if (is_on)
+                    this._notify("GameMode Activated", "Computer performance is now optimized for playing game");
+                else
+                    this._notify("GameMode Off", "Computer performance is reset for normal use");
             }
 
             this._sync();

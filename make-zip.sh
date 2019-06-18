@@ -17,6 +17,7 @@ ninja -C$builddir install
 # extract names from metadata.json
 uuid=`(jq -r .uuid "$builddir/metadata.json")`
 name=`(jq -r '."extension-id"' "$builddir/metadata.json")`
+schema=`(jq -r '."settings-schema"' "$builddir/metadata.json")`
 
 zipname="$uuid.shell-extension.zip"
 
@@ -26,7 +27,11 @@ extensiondir=$installdir/share/gnome-shell/extensions/$uuid
 schemadir=$installdir/share/glib-2.0/schemas
 localedir=$installdir/share/locale
 
-schema=$schemadir/org.gnome.shell.extensions.$name.gschema.xml
+schema=$schemadir/$schema.gschema.xml
+
+mkdir $extensiondir/schemas
+cp $schema $extensiondir/schemas;
+glib-compile-schemas $extensiondir/schemas
 
 (cd $extensiondir && zip -rmq $srcdir/$zipname .)
 
@@ -64,4 +69,5 @@ if [ "$#" -ge 1 ]; then
         ;;
     esac
 fi
+
 
