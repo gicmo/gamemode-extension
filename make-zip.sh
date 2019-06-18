@@ -54,7 +54,7 @@ install () {
 
     # unzip to the target
     mkdir -p "${extensionhome}"
-    unzip "${srcdir}/${zipname}" -d $targetdir}
+    unzip "${srcdir}/${zipname}" -d "${targetdir}"
 
     echo "${name} installed to ${targetdir}"
 }
