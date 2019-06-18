@@ -12,3 +12,7 @@ indent_size = 4
 [*{.json,.json.in}]
 indent_style = space
 indent_size = 2
+
+[*.xml]
+indent_style = space
+indent_size = 2
