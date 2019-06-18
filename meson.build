@@ -52,7 +52,8 @@ md = configure_file(input: 'metadata.json.in',
 # installation
 sources = [
   'client.js',
-  'extension.js'
+  'extension.js',
+  'prefs.js'
 ]
 
 install_data(
