@@ -32,3 +32,36 @@ schema=$schemadir/org.gnome.shell.extensions.$name.gschema.xml
 
 rm -rf $builddir
 rm -rf $installdir
+
+# optional arguments
+
+usage_error () {
+    echo "usage: $0 [install]"
+    exit 1
+}
+
+install () {
+    extensionhome="${HOME}/.local/share/gnome-shell/extensions"
+    targetdir="${extensionhome}/${uuid}"
+
+    # remove old stuff
+    rm -rf ${targetdir}
+
+    # unzip to the target
+    mkdir -p "${extensionhome}"
+    unzip "${srcdir}/${zipname}" -d $targetdir}
+
+    echo "${name} installed to ${targetdir}"
+}
+
+if [ "$#" -ge 1 ]; then
+    case "$1" in
+    install)
+        install
+        ;;
+    *)
+        usage_error
+        ;;
+    esac
+fi
+
