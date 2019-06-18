@@ -30,5 +30,5 @@ schema=$schemadir/org.gnome.shell.extensions.$name.gschema.xml
 
 (cd $extensiondir && zip -rmq $srcdir/$zipname .)
 
-# rm -rf $builddir
-# rm -rf $installdir
+rm -rf $builddir
+rm -rf $installdir
