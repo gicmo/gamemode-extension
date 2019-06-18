@@ -91,7 +91,7 @@ class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
     _onCountChanged(cli, count) {
         if (count > 0) {
             this._status.text = count + " active clients";
-        } else if (count == 1) {
+        } else if (count === 1) {
             this._status.text = "1 active client";
         } else {
             this._status.text = "No active clients";

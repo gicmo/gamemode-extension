@@ -79,7 +79,7 @@ var Client = class {
         this.client_count = this._proxy.ClientCount;
         if (this.client_count > 0) {
             this.emit('state-changed', true);
-            this.emit('count-changed', this.client_count)
+            this.emit('count-changed', this.client_count);
         }
     }
 
@@ -94,10 +94,10 @@ var Client = class {
 
         let after_on = this.client_count > 0;
 
-        if (before_on != after_on)
+        if (before_on !== after_on)
             this.emit('state-changed', after_on);
 
-        if (before_n != this.client_count)
+        if (before_n !== this.client_count)
             this.emit('count-changed', this.client_count);
     }
 

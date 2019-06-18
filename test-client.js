@@ -49,7 +49,7 @@ let client = new GameMode.Client(function(client) {
                     }
 
                     print("Unegistered to GameMode");
-                })
+                });
             });
         });
 
