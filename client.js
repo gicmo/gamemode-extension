@@ -45,9 +45,9 @@ const GAMEMODE_DBUS_PATH = '/com/feralinteractive/GameMode';
 
 var Client = class {
 
-   constructor(readyCallback) {
-	this._readyCallback = readyCallback;
-	this._proxy = null;
+    constructor(readyCallback) {
+        this._readyCallback = readyCallback;
+        this._proxy = null;
 
         let nodeInfo = Gio.DBusNodeInfo.new_for_xml(GameModeClientInterface);
         Gio.DBusProxy.new(Gio.DBus.session,
@@ -59,57 +59,57 @@ var Client = class {
                           null,
                           this._onProxyReady.bind(this));
 
-	this.client_count = 0;
+        this.client_count = 0;
     }
 
     _onProxyReady(o, res) {
 
-	try {
-	    this._proxy = Gio.DBusProxy.new_finish(res);
+        try {
+            this._proxy = Gio.DBusProxy.new_finish(res);
         } catch(e) {
-	    log('error creating GameMode proxy: %s'.format(e.message));
+            log('error creating GameMode proxy: %s'.format(e.message));
             return;
         }
 
-	this._propsChangedId = this._proxy.connect('g-properties-changed', this._onPropertiesChanged.bind(this));
+        this._propsChangedId = this._proxy.connect('g-properties-changed', this._onPropertiesChanged.bind(this));
 
-	if (this._readyCallback)
-	    this._readyCallback(this);
+        if (this._readyCallback)
+            this._readyCallback(this);
 
-	this.client_count = this._proxy.ClientCount;
-	if (this.client_count > 0) {
-	    this.emit('state-changed', true);
-	    this.emit('count-changed', this.client_count)
-	}
+        this.client_count = this._proxy.ClientCount;
+        if (this.client_count > 0) {
+            this.emit('state-changed', true);
+            this.emit('count-changed', this.client_count)
+        }
     }
 
     _onPropertiesChanged(proxy, properties) {
         let unpacked = properties.deep_unpack();
         if (!('ClientCount' in unpacked))
-	    return;
+            return;
 
-	let before_n = this.client_count;
-	let before_on = this.client_count > 0;
-	this.client_count = this._proxy.ClientCount;
+        let before_n = this.client_count;
+        let before_on = this.client_count > 0;
+        this.client_count = this._proxy.ClientCount;
 
-	let after_on = this.client_count > 0;
+        let after_on = this.client_count > 0;
 
-	if (before_on != after_on)
-	    this.emit('state-changed', after_on);
+        if (before_on != after_on)
+            this.emit('state-changed', after_on);
 
-	if (before_n != this.client_count)
-	    this.emit('count-changed', this.client_count);
+        if (before_n != this.client_count)
+            this.emit('count-changed', this.client_count);
     }
 
     /* public methods */
     close() {
-	this.disconnectAll();
+        this.disconnectAll();
 
         if (!this._proxy)
             return;
 
-	this._proxy.disconnect(this._propsChangedId);
-	this._proxy = null;
+        this._proxy.disconnect(this._propsChangedId);
+        this._proxy = null;
     }
 
     get clientCount () {
@@ -117,27 +117,27 @@ var Client = class {
     }
 
     registerGame(pid, callback) {
-	this._proxy.RegisterGameRemote(pid, (res, err) => {
-	    if (err) {
-		callback(-2, err);
-		return;
-	    }
+        this._proxy.RegisterGameRemote(pid, (res, err) => {
+            if (err) {
+                callback(-2, err);
+                return;
+            }
 
-	    let [status] = res;
-	    callback(status, null);
-	});
+            let [status] = res;
+            callback(status, null);
+        });
     }
 
     unregisterGame(pid, callback) {
-	this._proxy.UnregisterGameRemote(pid, (res, err) => {
-	    if (err) {
-		callback(-2, err);
-		return;
-	    }
+        this._proxy.UnregisterGameRemote(pid, (res, err) => {
+            if (err) {
+                callback(-2, err);
+                return;
+            }
 
-	    let [status] = res;
-	    callback(status, null);
-	});
+            let [status] = res;
+            callback(status, null);
+        });
     }
 };
 

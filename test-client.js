@@ -30,28 +30,28 @@ let pid = credentials.get_unix_pid();
 
 let client = new GameMode.Client(function(client) {
     client.connect('state-changed', function(c, s) {
-	print('state changed: ' + s + ' ' + client.clientCount);
+        print('state changed: ' + s + ' ' + client.clientCount);
     });
 
     GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 2, () => {
-	client.registerGame(pid, (status, error) => {
-	    if (error || status < 0) {
-		print("could not register to GameMode");
-		return;
-	    }
+        client.registerGame(pid, (status, error) => {
+            if (error || status < 0) {
+                print("could not register to GameMode");
+                return;
+            }
 
-	    print("Registered to GameMode");
-	    GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 5, () => {
-		client.unregisterGame(pid, (status, error) => {
-		    if (error || status < 0) {
-			print("could not unregister from GameMode");
-			return;
-		    }
+            print("Registered to GameMode");
+            GLib.timeout_add_seconds(GLib.PRIORITY_DEFAULT, 5, () => {
+                client.unregisterGame(pid, (status, error) => {
+                    if (error || status < 0) {
+                        print("could not unregister from GameMode");
+                        return;
+                    }
 
-		    print("Unegistered to GameMode");
-		})
-	    });
-	});
+                    print("Unegistered to GameMode");
+                })
+            });
+        });
 
     });
     print('state: ' + client.clientCount);
