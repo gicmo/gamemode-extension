@@ -124,13 +124,22 @@ var GameModeIndicator = GObject.registerClass(
 
             this._signals = [];
 
+            /* react to settings changes */
+            this._connect(this._settings,
+                          'changed::always-show-icon',
+                          this._sync.bind(this));
+
+            /* connect to GameMode */
             this._client = new GameMode.Client(null);
             this._client.connect('state-changed', this._onStateChanged.bind(this));
 
+            /* react to session changes */
             Main.sessionMode.connect('updated', this._sync.bind(this));
+
+            /* update the icon */
             this._sync();
 
-            this._source = null;
+            this._source = null; /* for the notification */
 
             let red = Clutter.Color.get_static(Clutter.StaticColor.GREEN);
             this._color_effect = new Clutter.ColorizeEffect({tint: red});
@@ -143,8 +152,20 @@ var GameModeIndicator = GObject.registerClass(
             log('GameMode extension initialized');
         }
 
+        _connect(obj, signal, handler) {
+            let id = obj.connect(signal, handler);
+            this._signals.push([obj, id]);
+        }
+
         _onDestroy() {
-            log('Destorying GameMode extension');
+            log('Destroying GameMode extension');
+
+            for (var i = 0; i < this._signals.length; i++) {
+                let [obj, id] = this._signals[i];
+                obj.disconnect(id);
+            }
+            this._signals = [];
+
             this._client.close();
         }
 
@@ -174,10 +195,14 @@ var GameModeIndicator = GObject.registerClass(
             this._source.notify(this._notification);
         }
 
-        /* Session callbacks */
+        /* Update the icon according to the current state */
         _sync() {
             let active = !Main.sessionMode.isLocked && !Main.sessionMode.isGreeter;
-            this.actor.visible = active;
+
+            let on = this._client.clientCount > 0;
+            let alwaysShow = this._settings.get_boolean('always-show-icon');
+
+            this.actor.visible = active && (alwaysShow || on);
         }
 
         /* GameMode.Client callbacks */
@@ -187,6 +212,9 @@ var GameModeIndicator = GObject.registerClass(
             } else {
                 this._icon.remove_effect_by_name('color');
             }
+
+            /* update the icon */
+            this._sync();
 
             if (this._settings.get_boolean('emit-notifications')) {
                 if (is_on)

@@ -6,5 +6,10 @@
       <summary>Emit notifications</summary>
       <description>Notify when the global GameMode status changes.</description>
     </key>
+    <key type="b" name="always-show-icon">
+      <default>false</default>
+      <summary>Always show the icon</summary>
+      <description>Show the icon even if GameMode is currently not active.</description>
+    </key>
   </schema>
 </schemalist>

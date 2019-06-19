@@ -15,6 +15,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         this._settings = ExtensionUtils.getSettings();
 
         this.add(this.make_row_switch('emit-notifications'));
+        this.add(this.make_row_switch('always-show-icon'));
     }
 
     make_row_switch(name) {
