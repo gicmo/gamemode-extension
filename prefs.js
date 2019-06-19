@@ -1,5 +1,6 @@
 const GObject = imports.gi.GObject;
 const Gtk = imports.gi.Gtk;
+const Gdk = imports.gi.Gdk;
 const Lang = imports.lang;
 const Gio = imports.gi.Gio;
 
@@ -13,12 +14,13 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         this.selection_mode = Gtk.SelectionMode.NONE;
         this.margin = 24;
         this._settings = ExtensionUtils.getSettings();
+        this._blocked = [];
 
         this.add(this.make_row_switch('emit-notifications'));
         this.add(this.make_row_switch('always-show-icon'));
     }
 
-    make_row_switch(name) {
+    make_row_switch(name, color) {
         let row = new Gtk.ListBoxRow ();
 
         let hbox = new Gtk.Box({
@@ -32,6 +34,29 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         hbox.pack_start(vbox, true, true, 6);
 
         let sw = new Gtk.Switch({ valign: Gtk.Align.CENTER });
+
+        if (color) {
+            let button = new Gtk.ColorButton({use_alpha: true});
+
+            let id = button.connect('notify::rgba', (widget, param) => {
+                let rgba = widget.get_rgba();
+                let css = rgba.to_string();
+                let idx = this._blocked.push(color);
+                this._settings.set_string(color, css);
+                this._blocked.splice(idx);
+            });
+
+            this._update_color_from_setting(button, color);
+
+            this._settings.connect(`changed::${color}`, () => {
+                this._update_color_from_setting(button, color);
+            });
+
+            hbox.pack_start(button, false, false, 6);
+            sw.bind_property('active', button, 'sensitive',
+                             GObject.BindingFlags.SYNC_CREATE);
+        }
+
         hbox.pack_start(sw, false, false, 0);
 
         let schema = this._settings.settings_schema;
@@ -59,6 +84,17 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         this._settings.bind(name, sw, 'active',
                             Gio.SettingsBindFlags.DEFAULT);
         return row;
+    }
+
+    _update_color_from_setting(widget, name) {
+        let idx = this._blocked.indexOf(name);
+        if (idx !== -1)
+            return;
+
+        let str = this._settings.get_string(name);
+        let rgba = new Gdk.RGBA();
+        rgba.parse(str);
+        widget.set_rgba(rgba);
     }
 });
 
