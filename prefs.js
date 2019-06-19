@@ -20,14 +20,18 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
     make_row_switch(name) {
         let row = new Gtk.ListBoxRow ();
 
-        let hbox = new Gtk.Box({ orientation: Gtk.Orientation.HORIZONTAL });
+        let hbox = new Gtk.Box({
+            orientation: Gtk.Orientation.HORIZONTAL,
+            margin: 12,
+        });
+
         row.add(hbox);
 
         let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
         hbox.pack_start(vbox, true, true, 6);
 
         let sw = new Gtk.Switch({ valign: Gtk.Align.CENTER });
-        hbox.pack_end(sw, false, false, 6);
+        hbox.pack_start(sw, false, false, 0);
 
         let schema = this._settings.settings_schema;
         let key = schema.get_key(name);
@@ -39,7 +43,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             use_markup: true
         });
 
-        vbox.pack_start(summary, true, true, 6);
+        vbox.pack_start(summary, false, false, 0);
 
         let description = new Gtk.Label({
             label: `<span size='small'>${key.get_description()}</span>`,
@@ -47,8 +51,9 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             halign: Gtk.Align.START,
             use_markup: true
         });
+        description.get_style_context().add_class('dim-label');
 
-        vbox.pack_end(description, true, true, 6);
+        vbox.pack_start(description, false, false, 0);
 
         this._settings.bind(name, sw, 'active',
                             Gio.SettingsBindFlags.DEFAULT);
