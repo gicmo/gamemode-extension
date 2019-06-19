@@ -1,7 +1,7 @@
 {
   "extension-id": "gamemode",
   "name": "GameMode",
-  "description": "GameMode indicator",
+  "description": "Status indicator for GameMode",
   "uuid": "@UUID@",
   "shell-version": ["3.32", "3.30"],
   "version": "@VERSION@",
