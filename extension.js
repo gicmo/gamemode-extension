@@ -21,6 +21,7 @@
 const Clutter = imports.gi.Clutter;
 const Gio = imports.gi.Gio;
 const GLib = imports.gi.GLib;
+const Gdk = imports.gi.Gdk;
 const GObject = imports.gi.GObject;
 const Lang = imports.lang;
 const Main = imports.ui.main;
@@ -129,6 +130,14 @@ var GameModeIndicator = GObject.registerClass(
                           'changed::always-show-icon',
                           this._sync.bind(this));
 
+            this._connect(this._settings,
+                          'changed::active-tint',
+                          this._sync.bind(this));
+
+            this._connect(this._settings,
+                          'changed::active-color',
+                          this._update_active_color.bind(this));
+
             /* connect to GameMode */
             this._client = new GameMode.Client(null);
             this._client.connect('state-changed', this._onStateChanged.bind(this));
@@ -136,13 +145,10 @@ var GameModeIndicator = GObject.registerClass(
             /* react to session changes */
             Main.sessionMode.connect('updated', this._sync.bind(this));
 
-            /* update the icon */
-            this._sync();
-
             this._source = null; /* for the notification */
 
-            let red = Clutter.Color.get_static(Clutter.StaticColor.GREEN);
-            this._color_effect = new Clutter.ColorizeEffect({tint: red});
+            /* update the icon */
+            this._update_active_color(); /* calls this._sync() */
 
             /* the menu */
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -201,18 +207,38 @@ var GameModeIndicator = GObject.registerClass(
 
             let on = this._client.clientCount > 0;
             let alwaysShow = this._settings.get_boolean('always-show-icon');
+            let tintIcon = this._settings.get_boolean('active-tint');
+
+            if (this._icon.has_effects()) {
+                this._icon.remove_effect_by_name('color');
+            }
+
+            if (on && tintIcon) {
+                this._icon.add_effect_with_name('color', this._color_effect);
+            }
 
             this.actor.visible = active && (alwaysShow || on);
         }
 
+        _update_active_color() {
+            let str = this._settings.get_string('active-color');
+            let rgba = new Gdk.RGBA();
+            rgba.parse(str);
+
+            let color = new Clutter.Color({
+                red: rgba.red * 255,
+                green: rgba.green * 255,
+                blue: rgba.blue * 255,
+                alpha: rgba.alpha*255});
+
+            this._color_effect = new Clutter.ColorizeEffect({tint: color});
+
+            /* sync the changes */
+            this._sync();
+        }
+
         /* GameMode.Client callbacks */
         _onStateChanged(cli, is_on) {
-            if (is_on) {
-                this._icon.add_effect_with_name('color', this._color_effect);
-            } else {
-                this._icon.remove_effect_by_name('color');
-            }
-
             /* update the icon */
             this._sync();
 

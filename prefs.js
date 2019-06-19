@@ -18,6 +18,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
 
         this.add(this.make_row_switch('emit-notifications'));
         this.add(this.make_row_switch('always-show-icon'));
+        this.add(this.make_row_switch('active-tint', 'active-color'));
     }
 
     make_row_switch(name, color) {

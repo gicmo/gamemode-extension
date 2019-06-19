@@ -11,5 +11,15 @@
       <summary>Always show the icon</summary>
       <description>Show the icon even if GameMode is currently not active.</description>
     </key>
+    <key type="b" name="active-tint">
+      <default>false</default>
+      <summary>Colorize when active</summary>
+      <description>Tint the icon with a color when GameMode is active.</description>
+    </key>
+    <key type="s" name="active-color">
+      <default>"rgb(115,210,22)"</default>
+      <summary>Active icon color.</summary>
+      <description>The color to use tinting the icon.</description>
+    </key>
   </schema>
 </schemalist>
