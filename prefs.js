@@ -31,15 +31,15 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
 
         row.add(hbox);
 
-        let vbox = new Gtk.Box({ orientation: Gtk.Orientation.VERTICAL });
+        let vbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
         hbox.pack_start(vbox, true, true, 6);
 
-        let sw = new Gtk.Switch({ valign: Gtk.Align.CENTER });
+        let sw = new Gtk.Switch({valign: Gtk.Align.CENTER});
 
         if (color) {
             let button = new Gtk.ColorButton({use_alpha: true});
 
-            let id = button.connect('notify::rgba', (widget, param) => {
+            button.connect('notify::rgba', (widget, param) => {
                 let rgba = widget.get_rgba();
                 let css = rgba.to_string();
                 let idx = this._blocked.push(color);

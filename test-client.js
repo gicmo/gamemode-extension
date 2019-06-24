@@ -28,8 +28,8 @@ const GameMode = imports.client;
 let credentials = new Gio.Credentials();
 let pid = credentials.get_unix_pid();
 
-let client = new GameMode.Client(function(client) {
-    client.connect('state-changed', function(c, s) {
+let client = new GameMode.Client((client) => {
+    client.connect('state-changed', (c, s) => {
         print('state changed: ' + s + ' ' + client.clientCount);
     });
 

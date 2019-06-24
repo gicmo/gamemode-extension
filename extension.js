@@ -47,10 +47,10 @@ class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
         super();
         this._client = client;
 
-        this._label = new St.Label({ text: _("GameMode status: "), x_expand: true });
+        this._label = new St.Label({text: _("GameMode status: "), x_expand: true});
         this.actor.add_child(this._label);
 
-        this._status = new St.Label({ text: '...', x_expand: false });
+        this._status = new St.Label({text: '...', x_expand: false});
         this.actor.add_child(this._status);
 
         this._changedId = client.connect('state-changed',
@@ -77,7 +77,7 @@ class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
         super();
         this._client = client;
 
-        this._status = new St.Label({ text: _("GameMode status: "), x_expand: true });
+        this._status = new St.Label({text: _("GameMode status: "), x_expand: true});
         this.actor.add_child(this._status);
 
         this._changedId = client.connect('count-changed',
@@ -115,7 +115,7 @@ var GameModeIndicator = GObject.registerClass(
 
             this.connect('destroy', this._onDestroy.bind(this));
 
-            let box = new St.BoxLayout({ style_class: 'panel-status-menu-box' });
+            let box = new St.BoxLayout({style_class: 'panel-status-menu-box'});
 
             let icon = new St.Icon({
                 icon_name: 'applications-games-symbolic',
@@ -182,7 +182,9 @@ var GameModeIndicator = GObject.registerClass(
             if (!this._source) {
                 this._source = new MessageTray.Source('GameMode',
                                                       'application-games-symbolic');
-                this._source.connect('destroy', () => { this._source = null; });
+                this._source.connect('destroy', () => {
+                    this._source = null;
+                });
 
                 Main.messageTray.add(this._source);
             }
@@ -232,8 +234,8 @@ var GameModeIndicator = GObject.registerClass(
                 red: rgba.red * 255,
                 green: rgba.green * 255,
                 blue: rgba.blue * 255,
-                alpha: rgba.alpha*255});
-
+                alpha: rgba.alpha * 255
+            });
             this._color_effect = new Clutter.ColorizeEffect({tint: color});
 
             /* sync the changes */
