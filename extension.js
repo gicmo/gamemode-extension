@@ -35,6 +35,9 @@ const Shell = imports.gi.Shell;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Extension = imports.misc.extensionUtils.getCurrentExtension();
 
+const Gettext = imports.gettext.domain(Extension.metadata['gettext-domain']);
+const _ = Gettext.gettext;
+
 const GameMode = Extension.imports.client;
 
 /* ui */
@@ -44,7 +47,7 @@ class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
         super();
         this._client = client;
 
-        this._label = new St.Label({ text: 'GameMode status: ', x_expand: true });
+        this._label = new St.Label({ text: _("GameMode status: "), x_expand: true });
         this.actor.add_child(this._label);
 
         this._status = new St.Label({ text: '...', x_expand: false });
@@ -65,7 +68,7 @@ class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 
     _onStateChanged(cli, is_on) {
-        this._status.text = is_on ? "on" : "off";
+        this._status.text = is_on ? _("active") : _("off");
     }
 }
 
@@ -74,7 +77,7 @@ class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
         super();
         this._client = client;
 
-        this._status = new St.Label({ text: 'GameMode status: ', x_expand: true });
+        this._status = new St.Label({ text: _("GameMode status: "), x_expand: true });
         this.actor.add_child(this._status);
 
         this._changedId = client.connect('count-changed',
@@ -92,12 +95,12 @@ class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 
     _onCountChanged(cli, count) {
-        if (count > 0) {
-            this._status.text = count + " active clients";
-        } else if (count === 1) {
-            this._status.text = "1 active client";
+        if (count === 0) {
+            this._status.text = _("No active clients");
         } else {
-            this._status.text = "No active clients";
+            this._status.text = Gettext.ngettext("%d active client",
+                                                 "%d active clients",
+                                                 count).format(count);
         }
     }
 }
@@ -107,7 +110,7 @@ var GameModeIndicator = GObject.registerClass(
     class GameModeIndicator extends PanelMenu.Button {
 
         _init() {
-            super._init(0.0, "GameMode");
+            super._init(0.0, 'GameMode');
             this._settings = ExtensionUtils.getSettings();
 
             this.connect('destroy', this._onDestroy.bind(this));
@@ -177,7 +180,7 @@ var GameModeIndicator = GObject.registerClass(
 
         _ensureSource() {
             if (!this._source) {
-                this._source = new MessageTray.Source(_("GameMode"),
+                this._source = new MessageTray.Source('GameMode',
                                                       'application-games-symbolic');
                 this._source.connect('destroy', () => { this._source = null; });
 
@@ -244,9 +247,9 @@ var GameModeIndicator = GObject.registerClass(
 
             if (this._settings.get_boolean('emit-notifications')) {
                 if (is_on)
-                    this._notify("GameMode Activated", "Computer performance is now optimized for playing game");
+                    this._notify(_("GameMode is active"), _("Computer performance is now optimized for playing games"));
                 else
-                    this._notify("GameMode Off", "Computer performance is reset for normal use");
+                    this._notify(_("GameMode is off"), _("Computer performance is reset for normal usage"));
             }
 
             this._sync();
@@ -258,7 +261,9 @@ var GameModeIndicator = GObject.registerClass(
 
 let indicator = null;
 
-function init() { }
+function init() {
+    ExtensionUtils.initTranslations();
+}
 
 
 function enable() {

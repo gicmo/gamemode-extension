@@ -33,6 +33,10 @@ mkdir $extensiondir/schemas
 cp $schema $extensiondir/schemas;
 glib-compile-schemas $extensiondir/schemas
 
+if [ -d $localedir ]; then
+    cp -pr $localedir $extensiondir
+fi
+
 (cd $extensiondir && zip -rmq $srcdir/$zipname .)
 
 rm -rf $builddir
