@@ -6,5 +6,6 @@
   "shell-version": ["3.32", "3.30"],
   "version": "@VERSION@",
   "original-author": "ckellner@redhat.com",
-  "settings-schema": "org.gnome.shell.extensions.gamemode"
+  "settings-schema": "org.gnome.shell.extensions.gamemode",
+  "gettext-domain": "@GETTEXT_DOMAIN@"
 }

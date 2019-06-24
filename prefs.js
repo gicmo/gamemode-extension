@@ -100,6 +100,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
 });
 
 function init() {
+    ExtensionUtils.initTranslations();
 }
 
 function buildPrefsWidget() {

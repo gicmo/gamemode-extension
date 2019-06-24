@@ -5,6 +5,7 @@ project('gamemode-extension',
 
 # our identity
 uuid = 'gamemode@christian.kellner.me'
+gettext_domain = meson.project_name()
 
 # imports
 gnome = import('gnome')
@@ -43,6 +44,7 @@ full_version =  meson.project_version() + '-' + gitrev
 conf = configuration_data()
 conf.set('UUID', uuid)
 conf.set('VERSION', full_version)
+conf.set('GETTEXT_DOMAIN', gettext_domain)
 conf.set('URL', 'https://github.com/gicmo/gamemode-extension')
 
 md = configure_file(input: 'metadata.json.in',
@@ -61,7 +63,7 @@ install_data(
   install_dir: installdir)
 
 install_data(
-  'data/gschema.xml',
+  'data/settings.gschema.xml',
   rename: 'org.gnome.shell.extensions.gamemode.gschema.xml',
   install_dir: schemadir)
 
@@ -78,6 +80,9 @@ if (js60.found())
 	 args: ['-s', '-c', fullpath])
   endforeach
 endif
+
+#i18n
+subdir('po')
 
 # all done. report.
 msg = ['',
