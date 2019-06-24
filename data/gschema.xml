@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<schemalist gettext-domain="gamemode-extensions">
+<schemalist gettext-domain="gamemode-extension">
   <schema path="/org/gnome/shell/extensions/gamemode/" id="org.gnome.shell.extensions.gamemode">
     <key type="b" name="emit-notifications">
       <default>true</default>
