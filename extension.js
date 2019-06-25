@@ -47,10 +47,10 @@ class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
         super();
         this._client = client;
 
-        this._label = new St.Label({text: _("GameMode status: "), x_expand: true});
+        this._label = new St.Label({text: _("GameMode status: "), x_expand: false});
         this.actor.add_child(this._label);
 
-        this._status = new St.Label({text: '...', x_expand: false});
+        this._status = new St.Label({text: '...', x_expand: true});
         this.actor.add_child(this._status);
 
         this._changedId = client.connect('state-changed',
