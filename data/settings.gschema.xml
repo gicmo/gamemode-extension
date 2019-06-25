@@ -3,22 +3,22 @@
   <schema path="/org/gnome/shell/extensions/gamemode/" id="org.gnome.shell.extensions.gamemode">
     <key type="b" name="emit-notifications">
       <default>true</default>
-      <summary>Emit notifications</summary>
-      <description>Notify when the global GameMode status changes.</description>
+      <summary>Notifications</summary>
+      <description>Emit notifications when the global GameMode status changes.</description>
     </key>
     <key type="b" name="always-show-icon">
       <default>false</default>
       <summary>Always show the icon</summary>
-      <description>Show the icon even if GameMode is currently not active.</description>
+      <description>Display the icon even if GameMode is currently not active.</description>
     </key>
     <key type="b" name="active-tint">
       <default>false</default>
-      <summary>Colorize when active</summary>
+      <summary>Active icon tint</summary>
       <description>Tint the icon with a color when GameMode is active.</description>
     </key>
     <key type="s" name="active-color">
       <default>"rgb(115,210,22)"</default>
-      <summary>Active icon color.</summary>
+      <summary>Active icon tint</summary>
       <description>The color to use tinting the icon.</description>
     </key>
   </schema>
