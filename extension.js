@@ -41,17 +41,21 @@ const _ = Gettext.gettext;
 const GameMode = Extension.imports.client;
 
 /* ui */
+function getStatusText(is_on) {
+    if (is_on) {
+        return _("GameMode is active");
+    }
+
+    return _("GameMode is off");
+}
 
 class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
     constructor(client) {
         super();
         this._client = client;
 
-        this._label = new St.Label({text: _("GameMode status: "), x_expand: false});
+        this._label = new St.Label({text: ('<status>'), x_expand: true});
         this.actor.add_child(this._label);
-
-        this._status = new St.Label({text: '...', x_expand: true});
-        this.actor.add_child(this._status);
 
         this._changedId = client.connect('state-changed',
                                          this._onStateChanged.bind(this));
@@ -68,8 +72,7 @@ class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 
     _onStateChanged(cli, is_on) {
-        /* Translators: this corresponds to "GameMode status" */
-        this._status.text = is_on ? _("active") : _("off");
+        this._label.text = getStatusText(is_on);
     }
 }
 
@@ -249,10 +252,11 @@ var GameModeIndicator = GObject.registerClass(
             this._sync();
 
             if (this._settings.get_boolean('emit-notifications')) {
+                let status = getStatusText(is_on);
                 if (is_on)
-                    this._notify(_("GameMode is active"), _("Computer performance is now optimized for playing games"));
+                    this._notify(status, _("Computer performance is now optimized for playing games"));
                 else
-                    this._notify(_("GameMode is off"), _("Computer performance is reset for normal usage"));
+                    this._notify(status, _("Computer performance is reset for normal usage"));
             }
 
             this._sync();
