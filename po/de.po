@@ -1,0 +1,61 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gamemode-extension package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Christian Kellner <christian@kellner.me>, 2019
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: gamemode-extension\n"
+"Report-Msgid-Bugs-To: \n"
+"Language-Team: German (https://www.transifex.com/GameMode/teams/100322/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: de\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#, javascript-format
+msgid "%d active client"
+msgid_plural "%d active clients"
+msgstr[0] "%d aktiver Client"
+msgstr[1] "%d aktive Clients"
+
+msgid "Active icon tint"
+msgstr "Symbol Einfärbung "
+
+msgid "Always show the icon"
+msgstr "Benachrichtigungen wenn sich der globale GameMode Status ändert."
+
+msgid "Computer performance is now optimized for playing games"
+msgstr "Die Leistung des Computers ist jetzt für Spiele optimiert."
+
+msgid "Computer performance is reset for normal usage"
+msgstr "Die Leistung des Computers ist für normalen Betrieb optimiert."
+
+msgid "Display the icon even if GameMode is currently not active."
+msgstr "Das Symbol ist auch sichtbar wenn GameMode gerade nicht aktiviert ist."
+
+msgid "Emit notifications when the global GameMode status changes."
+msgstr "Benachrichtigungen wenn sich der globale GameMode Status ändert."
+
+msgid "GameMode is active"
+msgstr "GameMode ist aktiv"
+
+msgid "GameMode is off"
+msgstr "GameMode ist aus"
+
+msgid "No active clients"
+msgstr "Keine aktiven Clients"
+
+msgid "Notifications"
+msgstr "Benachrichtigung"
+
+msgid "The color to use tinting the icon."
+msgstr "Die Farbe mit der das Symbol eingefärbt werden soll."
+
+msgid "Tint the icon with a color when GameMode is active."
+msgstr "Einfärben des Symbols wenn GameMode aktiv ist."
