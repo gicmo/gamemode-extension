@@ -68,6 +68,7 @@ class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
     }
 
     _onStateChanged(cli, is_on) {
+        /* Translators: this corresponds to "GameMode status" */
         this._status.text = is_on ? _("active") : _("off");
     }
 }
