@@ -1,0 +1,10 @@
+{
+  "name": "GameMode",
+  "description": "GameMode eslint check",
+  "devDependencies": {
+    "eslint": "^5.16.0"
+  },
+  "scripts": {
+    "lint": "eslint *.js"
+  }
+}

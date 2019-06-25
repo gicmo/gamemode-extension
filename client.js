@@ -66,7 +66,7 @@ var Client = class {
 
         try {
             this._proxy = Gio.DBusProxy.new_finish(res);
-        } catch(e) {
+        } catch (e) {
             log('error creating GameMode proxy: %s'.format(e.message));
             return;
         }
