@@ -22,6 +22,8 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
     }
 
     make_row_switch(name, color) {
+        let schema = this._settings.settings_schema;
+
         let row = new Gtk.ListBoxRow ();
 
         let hbox = new Gtk.Box({
@@ -56,11 +58,13 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             hbox.pack_start(button, false, false, 6);
             sw.bind_property('active', button, 'sensitive',
                              GObject.BindingFlags.SYNC_CREATE);
+
+            let ckey = schema.get_key(color);
+            button.set_tooltip_markup(ckey.get_description());
         }
 
         hbox.pack_start(sw, false, false, 0);
 
-        let schema = this._settings.settings_schema;
         let key = schema.get_key(name);
 
         let summary = new Gtk.Label({
