@@ -16,5 +16,17 @@ is also an .eslintrc.json file to linting via eslint:
 	npm run lint
 
 
-[github]: https://github.com/gicmo/gamemode-extension
+Translations
+============
 
+Translation is done via [transifex][transifex].
+
+	ninja -C build gamemode-extension-pot
+	tx push --source
+	tx pull --all --force --minimum-perc=5
+	ninja -C build fix-translations
+	git add po/*.po
+
+
+[github]: https://github.com/gicmo/gamemode-extension
+[transifex]: https://www.transifex.com/GameMode/gamemode-gnome-shell-extension

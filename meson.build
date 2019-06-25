@@ -84,6 +84,10 @@ endif
 #i18n
 subdir('po')
 
+run_target('fix-translations',
+	   command: ['scripts/fix_translations.py',
+		     join_paths(meson.source_root(), 'po')])
+
 # all done. report.
 msg = ['',
   'version:             @0@'.format(meson.project_version()),
