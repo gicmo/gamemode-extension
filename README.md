@@ -25,4 +25,4 @@ GNU Lesser General Public License, version 2.1 or later. See the
 COPYING file for details.
 
 [gamemode]: https://github.com/FeralInteractive/gamemode
-[screenshot]: https://github.com/gicmo/gamemode-extension/raw/master/screenshot/gamemode.png
+[screenshot]: https://github.com/gicmo/gamemode-extension/raw/master/screenshots/gamemode.png
