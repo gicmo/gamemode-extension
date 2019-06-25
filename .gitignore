@@ -1,5 +1,10 @@
 # standard build dir
 build/
+
+# node
+node_modules/
+package-lock.json
+
 # generated files
 *.zip
 metadata.json
