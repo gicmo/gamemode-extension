@@ -78,7 +78,7 @@ class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
         super();
         this._client = client;
 
-        this._status = new St.Label({text: _("GameMode status: "), x_expand: true});
+        this._status = new St.Label({text: '<client count>', x_expand: true});
         this.actor.add_child(this._status);
 
         this._changedId = client.connect('count-changed',
