@@ -1,4 +1,5 @@
-
+# standard build dir
+build/
 # generated files
 *.zip
 metadata.json
