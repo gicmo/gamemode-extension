@@ -2,6 +2,13 @@
 set -e
 # Largely inspired by Florian Müllner gnome-shell-extensions/export-zips.sh
 
+for cmd in meson ninja jq; do
+    if ! [ -x "$(command -v ${cmd})" ]; then
+        echo "Need '${cmd}' command. Please install." >&2
+        exit 1
+    fi
+done
+
 builddir="build/"
 
 srcdir=`dirname $0`
