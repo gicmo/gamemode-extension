@@ -20,6 +20,11 @@ uuid=`(jq -r .uuid "$builddir/metadata.json")`
 name=`(jq -r '."extension-id"' "$builddir/metadata.json")`
 schema=`(jq -r '."settings-schema"' "$builddir/metadata.json")`
 
+if [ -z "$uuid" ];then
+    echo "Could not read UUID from metadata. Aborting." >&2
+    exit 1
+fi
+
 zipname="$uuid.shell-extension.zip"
 
 rm -f "$srcdir/$zipname"
