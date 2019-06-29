@@ -1,4 +1,5 @@
 #!/bin/sh
+set -e
 # Largely inspired by Florian Müllner gnome-shell-extensions/export-zips.sh
 
 builddir="build/"
