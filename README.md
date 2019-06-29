@@ -13,7 +13,7 @@ Obtain the current development version of GameMode extension via:
 	git clone https://github.com/gicmo/gamemode-extension.git
 
 A script is included to create a zip archive which also can also install
-the extension for the current user.
+the extension for the current user. It depends on `meson`, `ninja` and `jq`.
 
 	./make-zip.sh         # just create the archive
 	./make-zip.sh install # create the archive and install it
