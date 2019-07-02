@@ -50,66 +50,66 @@ function getStatusText(is_on) {
 }
 
 var StatusMenuItem = GObject.registerClass(
-class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
-    _init(client) {
-        super._init();
-        this._client = client;
+    class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
+        _init(client) {
+            super._init();
+            this._client = client;
 
-        this._label = new St.Label({text: ('<status>'), x_expand: true});
-        this.add_child(this._label);
+            this._label = new St.Label({text: ('<status>'), x_expand: true});
+            this.add_child(this._label);
 
-        this._changedId = client.connect('state-changed',
-                                         this._onStateChanged.bind(this));
-        this._onStateChanged(this._client, this._client.clientCount > 0);
-    }
-
-    destroy() {
-        if (this._changedId) {
-            this._client.disconnect(this._changedId);
-            this._changedId = 0;
+            this._changedId = client.connect('state-changed',
+                                             this._onStateChanged.bind(this));
+            this._onStateChanged(this._client, this._client.clientCount > 0);
         }
 
-        super.destroy();
-    }
+        destroy() {
+            if (this._changedId) {
+                this._client.disconnect(this._changedId);
+                this._changedId = 0;
+            }
 
-    _onStateChanged(cli, is_on) {
-        this._label.text = getStatusText(is_on);
-    }
-});
+            super.destroy();
+        }
+
+        _onStateChanged(cli, is_on) {
+            this._label.text = getStatusText(is_on);
+        }
+    });
 
 var ClientCountMenuItem = GObject.registerClass(
-class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
-    _init(client) {
-        super._init();
-        this._client = client;
+    class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
+        _init(client) {
+            super._init();
+            this._client = client;
 
-        this._status = new St.Label({text: '<client count>', x_expand: true});
-        this.add_child(this._status);
+            this._status = new St.Label({text: '<client count>', x_expand: true});
+            this.add_child(this._status);
 
-        this._changedId = client.connect('count-changed',
-                                         this._onCountChanged.bind(this));
-        this._onCountChanged(this._client, this._client.clientCount);
-    }
-
-    destroy() {
-        if (this._changedId) {
-            this._client.disconnect(this._changedId);
-            this._changedId = 0;
+            this._changedId = client.connect('count-changed',
+                                             this._onCountChanged.bind(this));
+            this._onCountChanged(this._client, this._client.clientCount);
         }
 
-        super.destroy();
-    }
+        destroy() {
+            if (this._changedId) {
+                this._client.disconnect(this._changedId);
+                this._changedId = 0;
+            }
 
-    _onCountChanged(cli, count) {
-        if (count === 0) {
-            this._status.text = _("No active clients");
-        } else {
-            this._status.text = Gettext.ngettext("%d active client",
-                                                 "%d active clients",
-                                                 count).format(count);
+            super.destroy();
         }
-    }
-});
+
+        _onCountChanged(cli, count) {
+            if (count === 0) {
+                this._status.text = _("No active clients");
+            } else {
+                this._status.text = Gettext.ngettext("%d active client",
+                                                     "%d active clients",
+                                                     count).format(count);
+            }
+        }
+    });
 
 /* main button */
 var GameModeIndicator = GObject.registerClass(
