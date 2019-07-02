@@ -49,13 +49,14 @@ function getStatusText(is_on) {
     return _("GameMode is off");
 }
 
+var StatusMenuItem = GObject.registerClass(
 class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
-    constructor(client) {
-        super();
+    _init(client) {
+        super._init();
         this._client = client;
 
         this._label = new St.Label({text: ('<status>'), x_expand: true});
-        this.actor.add_child(this._label);
+        this.add_child(this._label);
 
         this._changedId = client.connect('state-changed',
                                          this._onStateChanged.bind(this));
@@ -74,15 +75,16 @@ class StatusMenuItem extends PopupMenu.PopupBaseMenuItem {
     _onStateChanged(cli, is_on) {
         this._label.text = getStatusText(is_on);
     }
-}
+});
 
+var ClientCountMenuItem = GObject.registerClass(
 class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
-    constructor(client) {
-        super();
+    _init(client) {
+        super._init();
         this._client = client;
 
         this._status = new St.Label({text: '<client count>', x_expand: true});
-        this.actor.add_child(this._status);
+        this.add_child(this._status);
 
         this._changedId = client.connect('count-changed',
                                          this._onCountChanged.bind(this));
@@ -107,7 +109,7 @@ class ClientCountMenuItem extends PopupMenu.PopupBaseMenuItem {
                                                  count).format(count);
         }
     }
-}
+});
 
 /* main button */
 var GameModeIndicator = GObject.registerClass(
@@ -128,7 +130,7 @@ var GameModeIndicator = GObject.registerClass(
 
             this._icon = icon;
             box.add_child(icon);
-            this.actor.add_child(box);
+            this.add_child(box);
 
             this._signals = [];
 
@@ -226,7 +228,7 @@ var GameModeIndicator = GObject.registerClass(
                 this._icon.add_effect_with_name('color', this._color_effect);
             }
 
-            this.actor.visible = active && (alwaysShow || on);
+            this.visible = active && (alwaysShow || on);
         }
 
         _update_active_color() {
