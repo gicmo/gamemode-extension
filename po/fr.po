@@ -1,0 +1,64 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gamemode-extension package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Christian Kellner <christian@kellner.me>, 2019
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gamemode-extension\n"
+"Report-Msgid-Bugs-To: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: fr\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Mathieu Heurtevin <wiiu3dsxl13127@gmail.com>\n"
+"X-Generator: Poedit 2.2.1\n"
+
+#, javascript-format
+msgid "%d active client"
+msgid_plural "%d active clients"
+msgstr[0] "%d client actif"
+msgstr[1] "%d clients actifs"
+
+msgid "Active icon tint"
+msgstr "Teinte d'icône active"
+
+msgid "Always show the icon"
+msgstr "Toujours afficher l'icône"
+
+msgid "Computer performance is now optimized for playing games"
+msgstr "Les performances de l'ordinateur sont maintenant optimisées pour vos jeux"
+
+msgid "Computer performance is reset for normal usage"
+msgstr "Les performances de l'ordinateur ont été remis à leurs valeurs normales"
+
+msgid "Display the icon even if GameMode is currently not active."
+msgstr "Afficher l'icône même si le GameMode est éteint."
+
+msgid "Emit notifications when the global GameMode status changes."
+msgstr "Émettre des notifications quand le statut du GameMode change."
+
+msgid "GameMode is active"
+msgstr "GameMode est actif"
+
+msgid "GameMode is off"
+msgstr "GameMode est éteint"
+
+msgid "No active clients"
+msgstr "Aucun client actif"
+
+msgid "Notifications"
+msgstr "Notifications"
+
+msgid "The color to use tinting the icon."
+msgstr "La couleur utilisé pour teinter l'icône."
+
+msgid "Tint the icon with a color when GameMode is active."
+msgstr "Teinte l'icône d'une couleur quand le GameMode est actif."
