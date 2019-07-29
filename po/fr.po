@@ -1,10 +1,10 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# French translation for the gamemode's extension.
+# Copyright (C) 2019
 # This file is distributed under the same license as the gamemode-extension package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# Christian Kellner <christian@kellner.me>, 2019.
 #
 # Translators:
-# Christian Kellner <christian@kellner.me>, 2019
+# Mathieu Heurtevin <wiiu3dsxl13127@gmail.com>, 2019
 #
 msgid ""
 msgstr ""
