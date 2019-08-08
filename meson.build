@@ -1,7 +1,7 @@
 project('gamemode-extension',
 	version: '4',
 	meson_version: '>= 0.46.0',
-	license: 'GPL2+' )
+	license: 'LGPL-2.1' )
 
 # our identity
 uuid = 'gamemode@christian.kellner.me'
