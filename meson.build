@@ -1,5 +1,5 @@
 project('gamemode-extension',
-	version: '4',
+	version: '5',
 	meson_version: '>= 0.46.0',
 	license: 'LGPL-2.1' )
 
