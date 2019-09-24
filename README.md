@@ -2,7 +2,8 @@
 
 [GameMode][gamemode] is a software package to "optimize Linux system
 performance on demand". This GNOME Shell extension will show the current
-status of GameMode. For it to work, GameMode 1.4 or greater is required.
+status of GameMode. For it to work, GameMode 1.4 or greater and GNOME
+Shell version 3.34 or greater are required.
 
 ![screenshot][screenshot]
 
