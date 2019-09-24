@@ -3,7 +3,7 @@
   "name": "GameMode",
   "description": "Status indicator for GameMode",
   "uuid": "@UUID@",
-  "shell-version": ["3.32", "3.30"],
+  "shell-version": ["3.34"],
   "version": "@VERSION@",
   "original-author": "ckellner@redhat.com",
   "settings-schema": "org.gnome.shell.extensions.gamemode",
