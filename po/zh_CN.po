@@ -1,0 +1,63 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gamemode-extension package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# Translators:
+# Christian Kellner <christian@kellner.me>, 2019
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: gamemode-extension\n"
+"Report-Msgid-Bugs-To: \n"
+"Language-Team: German (https://www.transifex.com/GameMode/teams/100322/de/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"X-Generator: Poedit 2.3\n"
+"Last-Translator: 弱弱的胖橘猫 <gesangtome@foxmail.com>\n"
+"Language: zh_CN\n"
+
+#, javascript-format
+msgid "%d active client"
+msgid_plural "%d active clients"
+msgstr[0] "%d 个激活的客户端"
+
+msgid "Active icon tint"
+msgstr "激活的活动图标颜色"
+
+msgid "Always show the icon"
+msgstr "总是显示图标"
+
+msgid "Computer performance is now optimized for playing games"
+msgstr "已对计算机游戏性能进行优化"
+
+msgid "Computer performance is reset for normal usage"
+msgstr "计算机性能已重置为正常使用"
+
+msgid "Display the icon even if GameMode is currently not active."
+msgstr "即使GameMode当前未激活也显示图标。"
+
+msgid "Emit notifications when the global GameMode status changes."
+msgstr "当全局GameMode状态改变时发出通知。"
+
+msgid "GameMode is active"
+msgstr "GameMode已激活"
+
+msgid "GameMode is off"
+msgstr "GameMode已关闭"
+
+msgid "No active clients"
+msgstr "没有激活的客户端"
+
+msgid "Notifications"
+msgstr "通知"
+
+msgid "The color to use tinting the icon."
+msgstr "用于给图标着色的颜色。"
+
+msgid "Tint the icon with a color when GameMode is active."
+msgstr "当GameMode激活时为活动图标着色。"
