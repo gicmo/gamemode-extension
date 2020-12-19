@@ -187,7 +187,7 @@ var GameModeIndicator = GObject.registerClass(
         _ensureSource() {
             if (!this._source) {
                 this._source = new MessageTray.Source('GameMode',
-                                                      'application-games-symbolic');
+                                                      'applications-games-symbolic');
                 this._source.connect('destroy', () => {
                     this._source = null;
                 });
