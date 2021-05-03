@@ -168,5 +168,10 @@ function init() {
 function buildPrefsWidget() {
     let widget = new GameModeSettings();
 
+    if(shellVersion < 40)
+    {
+        widget.show_all();
+    }
+
     return widget;
 }
