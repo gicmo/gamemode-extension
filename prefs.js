@@ -19,14 +19,12 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         this._settings = ExtensionUtils.getSettings();
         this._blocked = [];
 
-        if (shellVersion < 40)
-        {
+        if (shellVersion < 40) {
             this.add(this.make_row_switch('emit-notifications'));
             this.add(this.make_row_switch('always-show-icon'));
             this.add(this.make_row_switch('active-tint', 'active-color'));
         }
-        else
-        {
+        else {
             this.append(this.make_row_switch('emit-notifications'));
             this.append(this.make_row_switch('always-show-icon'));
             this.append(this.make_row_switch('active-tint', 'active-color'));
@@ -42,24 +40,20 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             orientation: Gtk.Orientation.HORIZONTAL,
         });
 
-        if(shellVersion < 40)
-        {
+        if(shellVersion < 40) {
             row.add(hbox)
         }
-        else
-        {
+        else {
             hbox.margin = 12;
             row.child = hbox;
         }
 
         let vbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
 
-        if(shellVersion < 40)
-        {
+        if(shellVersion < 40) {
             hbox.pack_start(vbox, true, true, 6);
         }
-        else
-        {
+        else {
             hbox.append(vbox);
         }
         
@@ -83,12 +77,10 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
                 this._update_color_from_setting(button, color);
             });
 
-            if(shellVersion < 40)
-            {
+            if(shellVersion < 40) {
                 hbox.pack_start(button, false, false, 6);
             }
-            else
-            {
+            else {
                 hbox.append(button);
             }
             
@@ -117,12 +109,10 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             use_markup: true
         });
 
-        if(shellVersion < 40)
-        {
+        if(shellVersion < 40) {
             vbox.pack_start(summary, false, false, 0);
         }
-        else
-        {
+        else {
             vbox.append(summary);
         }
 
@@ -134,12 +124,10 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         });
         description.get_style_context().add_class('dim-label');
 
-        if(shellVersion < 40)
-        {
+        if(shellVersion < 40) {
             vbox.pack_start(description, false, false, 0);
         }
-        else
-        {
+        else {
             vbox.append(description);
         }
         
@@ -168,8 +156,7 @@ function init() {
 function buildPrefsWidget() {
     let widget = new GameModeSettings();
 
-    if(shellVersion < 40)
-    {
+    if(shellVersion < 40) {
         widget.show_all();
     }
 
