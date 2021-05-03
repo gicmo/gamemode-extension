@@ -7,18 +7,30 @@ const Gio = imports.gi.Gio;
 const ExtensionUtils = imports.misc.extensionUtils;
 const Me = ExtensionUtils.getCurrentExtension();
 
+const Config = imports.misc.config;
+const [major] = Config.PACKAGE_VERSION.split('.');
+const shellVersion = Number.parseInt(major);
+
 var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gtk.ListBox {
 
     _init(params) {
         super._init(params);
         this.selection_mode = Gtk.SelectionMode.NONE;
-        this.margin = 24;
         this._settings = ExtensionUtils.getSettings();
         this._blocked = [];
 
-        this.add(this.make_row_switch('emit-notifications'));
-        this.add(this.make_row_switch('always-show-icon'));
-        this.add(this.make_row_switch('active-tint', 'active-color'));
+        if (shellVersion < 40)
+        {
+            this.add(this.make_row_switch('emit-notifications'));
+            this.add(this.make_row_switch('always-show-icon'));
+            this.add(this.make_row_switch('active-tint', 'active-color'));
+        }
+        else
+        {
+            this.append(this.make_row_switch('emit-notifications'));
+            this.append(this.make_row_switch('always-show-icon'));
+            this.append(this.make_row_switch('active-tint', 'active-color'));
+        }
     }
 
     make_row_switch(name, color) {
@@ -28,13 +40,29 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
 
         let hbox = new Gtk.Box({
             orientation: Gtk.Orientation.HORIZONTAL,
-            margin: 12,
         });
 
-        row.add(hbox);
+        if(shellVersion < 40)
+        {
+            row.add(hbox)
+        }
+        else
+        {
+            hbox.margin = 12;
+            row.child = hbox;
+        }
 
         let vbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
-        hbox.pack_start(vbox, true, true, 6);
+
+        if(shellVersion < 40)
+        {
+            hbox.pack_start(vbox, true, true, 6);
+        }
+        else
+        {
+            hbox.append(vbox);
+        }
+        
 
         let sw = new Gtk.Switch({valign: Gtk.Align.CENTER});
 
@@ -55,7 +83,15 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
                 this._update_color_from_setting(button, color);
             });
 
-            hbox.pack_start(button, false, false, 6);
+            if(shellVersion < 40)
+            {
+                hbox.pack_start(button, false, false, 6);
+            }
+            else
+            {
+                hbox.append(button);
+            }
+            
             sw.bind_property('active', button, 'sensitive',
                              GObject.BindingFlags.SYNC_CREATE);
 
@@ -63,7 +99,14 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             button.set_tooltip_markup(ckey.get_description());
         }
 
-        hbox.pack_start(sw, false, false, 0);
+        if(shellVersion < 40)
+        {
+            hbox.pack_start(sw, false, false, 0);
+        }
+        else
+        {
+            hbox.append(sw);
+        }
 
         let key = schema.get_key(name);
 
@@ -74,7 +117,14 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             use_markup: true
         });
 
-        vbox.pack_start(summary, false, false, 0);
+        if(shellVersion < 40)
+        {
+            vbox.pack_start(summary, false, false, 0);
+        }
+        else
+        {
+            vbox.append(summary);
+        }
 
         let description = new Gtk.Label({
             label: `<span size='small'>${key.get_description()}</span>`,
@@ -84,7 +134,15 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         });
         description.get_style_context().add_class('dim-label');
 
-        vbox.pack_start(description, false, false, 0);
+        if(shellVersion < 40)
+        {
+            vbox.pack_start(description, false, false, 0);
+        }
+        else
+        {
+            vbox.append(description);
+        }
+        
 
         this._settings.bind(name, sw, 'active',
                             Gio.SettingsBindFlags.DEFAULT);
@@ -109,7 +167,6 @@ function init() {
 
 function buildPrefsWidget() {
     let widget = new GameModeSettings();
-    widget.show_all();
 
     return widget;
 }
