@@ -23,8 +23,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             this.add(this.make_row_switch('emit-notifications'));
             this.add(this.make_row_switch('always-show-icon'));
             this.add(this.make_row_switch('active-tint', 'active-color'));
-        }
-        else {
+        } else {
             this.append(this.make_row_switch('emit-notifications'));
             this.append(this.make_row_switch('always-show-icon'));
             this.append(this.make_row_switch('active-tint', 'active-color'));
@@ -41,9 +40,8 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         });
 
         if (shellVersion < 40) {
-            row.add(hbox)
-        }
-        else {
+            row.add(hbox);
+        } else {
             hbox.margin = 12;
             row.child = hbox;
         }
@@ -52,8 +50,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
 
         if (shellVersion < 40) {
             hbox.pack_start(vbox, true, true, 6);
-        }
-        else {
+        } else {
             hbox.append(vbox);
         }
         
@@ -77,10 +74,9 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
                 this._update_color_from_setting(button, color);
             });
 
-            if(shellVersion < 40) {
+            if (shellVersion < 40) {
                 hbox.pack_start(button, false, false, 6);
-            }
-            else {
+            } else {
                 hbox.append(button);
             }
             
@@ -93,9 +89,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
 
         if (shellVersion < 40) {
             hbox.pack_start(sw, false, false, 0);
-        }
-        else
-        {
+        } else {
             hbox.append(sw);
         }
 
@@ -110,8 +104,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
 
         if (shellVersion < 40) {
             vbox.pack_start(summary, false, false, 0);
-        }
-        else {
+        } else {
             vbox.append(summary);
         }
 
@@ -125,8 +118,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
 
         if (shellVersion < 40) {
             vbox.pack_start(description, false, false, 0);
-        }
-        else {
+        } else {
             vbox.append(description);
         }
         
