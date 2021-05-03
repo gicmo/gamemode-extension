@@ -40,7 +40,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             orientation: Gtk.Orientation.HORIZONTAL,
         });
 
-        if(shellVersion < 40) {
+        if (shellVersion < 40) {
             row.add(hbox)
         }
         else {
@@ -50,7 +50,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
 
         let vbox = new Gtk.Box({orientation: Gtk.Orientation.VERTICAL});
 
-        if(shellVersion < 40) {
+        if (shellVersion < 40) {
             hbox.pack_start(vbox, true, true, 6);
         }
         else {
@@ -91,8 +91,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             button.set_tooltip_markup(ckey.get_description());
         }
 
-        if(shellVersion < 40)
-        {
+        if (shellVersion < 40) {
             hbox.pack_start(sw, false, false, 0);
         }
         else
@@ -109,7 +108,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             use_markup: true
         });
 
-        if(shellVersion < 40) {
+        if (shellVersion < 40) {
             vbox.pack_start(summary, false, false, 0);
         }
         else {
@@ -124,7 +123,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         });
         description.get_style_context().add_class('dim-label');
 
-        if(shellVersion < 40) {
+        if (shellVersion < 40) {
             vbox.pack_start(description, false, false, 0);
         }
         else {
@@ -156,7 +155,7 @@ function init() {
 function buildPrefsWidget() {
     let widget = new GameModeSettings();
 
-    if(shellVersion < 40) {
+    if (shellVersion < 40) {
         widget.show_all();
     }
 
