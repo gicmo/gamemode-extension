@@ -5,6 +5,7 @@ project('gamemode-extension',
 
 # our identity
 uuid = 'gamemode@christian.kellner.me'
+url = 'https://github.com/gicmo/gamemode-extension'
 gettext_domain = meson.project_name()
 
 # imports
@@ -45,7 +46,7 @@ conf = configuration_data()
 conf.set('UUID', uuid)
 conf.set('VERSION', full_version)
 conf.set('GETTEXT_DOMAIN', gettext_domain)
-conf.set('URL', 'https://github.com/gicmo/gamemode-extension')
+conf.set('URL', url)
 
 md = configure_file(input: 'metadata.json.in',
 		    output: 'metadata.json',
