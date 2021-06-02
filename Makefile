@@ -5,6 +5,7 @@ TMPDIR := $(shell mktemp -p "$(SRCDIR)" -d _install.XXXXXX)
 
 UUID := gamemode@christian.kellner.me
 VERSION := $(shell git describe 2> /dev/null || git rev-parse --short HEAD)
+URL := https://github.com/gicmo/gamemode-extension
 
 SOURCES := extension.js client.js
 OTHER := LICENSE README.md
