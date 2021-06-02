@@ -5,6 +5,7 @@
   "uuid": "@UUID@",
   "shell-version": ["3.34", "3.36"],
   "version": "@VERSION@",
+  "url": "@URL@",
   "original-author": "ckellner@redhat.com",
   "settings-schema": "org.gnome.shell.extensions.gamemode",
   "gettext-domain": "@GETTEXT_DOMAIN@"
