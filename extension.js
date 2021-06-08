@@ -209,7 +209,7 @@ var GameModeIndicator = GObject.registerClass(
             this._notification.connect('destroy', () => {
                 this._notification = null;
             });
-            this._source.notify(this._notification);
+            this._source.showNotification(this._notification);
         }
 
         /* Update the icon according to the current state */
