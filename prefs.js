@@ -54,7 +54,6 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         } else {
             hbox.append(vbox);
         }
-        
 
         let sw = new Gtk.Switch({valign: Gtk.Align.CENTER});
 
@@ -80,7 +79,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             } else {
                 hbox.append(button);
             }
-            
+
             sw.bind_property('active', button, 'sensitive',
                              GObject.BindingFlags.SYNC_CREATE);
 
@@ -122,7 +121,6 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         } else {
             vbox.append(description);
         }
-        
 
         this._settings.bind(name, sw, 'active',
                             Gio.SettingsBindFlags.DEFAULT);
