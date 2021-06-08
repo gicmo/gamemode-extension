@@ -23,7 +23,7 @@ schemadir = join_paths(datadir, 'glib-2.0', 'schemas')
 installdir = join_paths(extensiondir, uuid)
 
 # dependencies
-js60 = find_program('js60', required: false)
+js68 = find_program('js68', required: false)
 git = find_program('git', required: false)
 
 # optional git revision suffix
@@ -72,11 +72,11 @@ meson.add_install_script(
   join_paths(prefix, schemadir))
 
 # tests
-if (js60.found())
+if (js68.found())
   foreach src : sources
     fullpath = join_paths(srcdir, src)
     test('Syntax check for ' + '@0@'.format(src),
-	 js60,
+	 js68,
 	 args: ['-s', '-c', fullpath])
   endforeach
 endif
