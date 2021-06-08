@@ -149,10 +149,10 @@ var GameModeIndicator = GObject.registerClass(
 
             /* connect to GameMode */
             this._client = new GameMode.Client(null);
-            this._client.connect('state-changed', this._onStateChanged.bind(this));
+            this._connect(this._client, 'state-changed', this._onStateChanged.bind(this));
 
             /* react to session changes */
-            Main.sessionMode.connect('updated', this._sync.bind(this));
+            this._connect(Main.sessionMode, 'updated', this._sync.bind(this));
 
             this._source = null; /* for the notification */
 
