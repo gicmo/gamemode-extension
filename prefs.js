@@ -25,6 +25,10 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             this.add(this.make_row_switch('always-show-icon'));
             this.add(this.make_row_switch('active-tint', 'active-color'));
         } else {
+            this.margin_start = 24;
+            this.margin_end = 24;
+            this.margin_top = 24;
+            this.margin_bottom = 24;
             this.append(this.make_row_switch('emit-notifications'));
             this.append(this.make_row_switch('always-show-icon'));
             this.append(this.make_row_switch('active-tint', 'active-color'));
@@ -43,7 +47,10 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
         if (shellVersion < 40) {
             row.add(hbox);
         } else {
-            hbox.margin = 12;
+            hbox.margin_start = 12;
+            hbox.margin_end = 12;
+            hbox.margin_top = 12;
+            hbox.margin_bottom = 12;
             row.child = hbox;
         }
 
@@ -77,6 +84,8 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             if (shellVersion < 40) {
                 hbox.pack_start(button, false, false, 6);
             } else {
+                button.margin_start = 6;
+                button.margin_end = 6;
                 hbox.append(button);
             }
 
