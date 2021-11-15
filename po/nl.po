@@ -1,0 +1,73 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the gamemode-extension package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+# 
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: gamemode-extension\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2019-06-25 14:47+0200\n"
+"PO-Revision-Date: 2019-06-25 12:51+0000\n"
+"Language-Team: Dutch (https://www.transifex.com/GameMode/teams/100322/nl/)\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: nl\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+
+#: extension.js:46
+msgid "GameMode is active"
+msgstr ""
+
+#: extension.js:49
+msgid "GameMode is off"
+msgstr ""
+
+#: extension.js:103
+msgid "No active clients"
+msgstr ""
+
+#: extension.js:105
+#, javascript-format
+msgid "%d active client"
+msgid_plural "%d active clients"
+msgstr[0] ""
+msgstr[1] ""
+
+#: extension.js:257
+msgid "Computer performance is now optimized for playing games"
+msgstr ""
+
+#: extension.js:259
+msgid "Computer performance is reset for normal usage"
+msgstr ""
+
+#: data/settings.gschema.xml:6
+msgid "Notifications"
+msgstr ""
+
+#: data/settings.gschema.xml:7
+msgid "Emit notifications when the global GameMode status changes."
+msgstr ""
+
+#: data/settings.gschema.xml:11
+msgid "Always show the icon"
+msgstr ""
+
+#: data/settings.gschema.xml:12
+msgid "Display the icon even if GameMode is currently not active."
+msgstr ""
+
+#: data/settings.gschema.xml:16 data/settings.gschema.xml:21
+msgid "Active icon tint"
+msgstr ""
+
+#: data/settings.gschema.xml:17
+msgid "Tint the icon with a color when GameMode is active."
+msgstr ""
+
+#: data/settings.gschema.xml:22
+msgid "The color to use tinting the icon."
+msgstr ""
