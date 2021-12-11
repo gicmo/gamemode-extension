@@ -1,10 +1,6 @@
-# SOME DESCRIPTIVE TITLE.
-# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
-# This file is distributed under the same license as the gamemode-extension package.
-# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
 #
 # Translators:
-# Christian Kellner <christian@kellner.me>, 2019
+#  弱弱的胖橘猫 <gesangtome@foxmail.com 
 #
 msgid ""
 msgstr ""
