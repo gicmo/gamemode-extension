@@ -6,9 +6,6 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: gamemode-extension\n"
-"POT-Creation-Date: 2019-09-30 09:45+0200\n"
-"PO-Revision-Date: 2019-09-30 10:00+0200\n"
-"Last-Translator: Milo Casagrande <milo@milo.name>\n"
 "Language-Team: Italian <tp@lists.linux.it>\n"
 "Language: it\n"
 "MIME-Version: 1.0\n"
@@ -17,57 +14,44 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "X-Generator: Poedit 2.2.3\n"
 
-#: ../extension.js:46
-msgid "GameMode is active"
-msgstr "GameMode è attivo"
-
-#: ../extension.js:49
-msgid "GameMode is off"
-msgstr "GameMode non è attivo"
-
-#: ../extension.js:105
-msgid "No active clients"
-msgstr "Nessun client attivo"
-
-#: ../extension.js:107
 #, javascript-format
 msgid "%d active client"
 msgid_plural "%d active clients"
 msgstr[0] "%d client attivo"
 msgstr[1] "%d client attivi"
 
-#: ../extension.js:259
-msgid "Computer performance is now optimized for playing games"
-msgstr "Le prestazioni del computer sono ora ottimizzate per i videogiochi"
-
-#: ../extension.js:261
-msgid "Computer performance is reset for normal usage"
-msgstr "Le prestazioni del computer sono ora impostate per un utilizzo normale"
-
-#: ../data/settings.gschema.xml.h:1
-msgid "Notifications"
-msgstr "Notifiche"
-
-#: ../data/settings.gschema.xml.h:2
-msgid "Emit notifications when the global GameMode status changes."
-msgstr "Emette notifiche quando cambia lo stato globale di GameMode"
-
-#: ../data/settings.gschema.xml.h:3
-msgid "Always show the icon"
-msgstr "Mostrare sempre l'icona"
-
-#: ../data/settings.gschema.xml.h:4
-msgid "Display the icon even if GameMode is currently not active."
-msgstr "Mostra l'icona anche se GameMode non è attivo"
-
-#: ../data/settings.gschema.xml.h:5
 msgid "Active icon tint"
 msgstr "Colore icona"
 
-#: ../data/settings.gschema.xml.h:6
-msgid "Tint the icon with a color when GameMode is active."
-msgstr "Colore dell'icona quando GameMode è attivo"
+msgid "Always show the icon"
+msgstr "Mostrare sempre l'icona"
 
-#: ../data/settings.gschema.xml.h:7
+msgid "Computer performance is now optimized for playing games"
+msgstr "Le prestazioni del computer sono ora ottimizzate per i videogiochi"
+
+msgid "Computer performance is reset for normal usage"
+msgstr "Le prestazioni del computer sono ora impostate per un utilizzo normale"
+
+msgid "Display the icon even if GameMode is currently not active."
+msgstr "Mostra l'icona anche se GameMode non è attivo"
+
+msgid "Emit notifications when the global GameMode status changes."
+msgstr "Emette notifiche quando cambia lo stato globale di GameMode"
+
+msgid "GameMode is active"
+msgstr "GameMode è attivo"
+
+msgid "GameMode is off"
+msgstr "GameMode non è attivo"
+
+msgid "No active clients"
+msgstr "Nessun client attivo"
+
+msgid "Notifications"
+msgstr "Notifiche"
+
 msgid "The color to use tinting the icon."
 msgstr "Il colore da usare per l'icona"
+
+msgid "Tint the icon with a color when GameMode is active."
+msgstr "Colore dell'icona quando GameMode è attivo"

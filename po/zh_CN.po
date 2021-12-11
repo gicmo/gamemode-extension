@@ -15,10 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
 "X-Generator: Poedit 2.3\n"
-"Last-Translator: 弱弱的胖橘猫 <gesangtome@foxmail.com>\n"
 "Language: zh_CN\n"
 
 #, javascript-format

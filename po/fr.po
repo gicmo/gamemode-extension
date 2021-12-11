@@ -16,9 +16,6 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Language: fr\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"POT-Creation-Date: \n"
-"PO-Revision-Date: \n"
-"Last-Translator: Mathieu Heurtevin <wiiu3dsxl13127@gmail.com>\n"
 "X-Generator: Poedit 2.2.1\n"
 
 #, javascript-format
