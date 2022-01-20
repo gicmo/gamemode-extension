@@ -119,6 +119,13 @@ var GameModeIndicator = GObject.registerClass(
             super._init(0.0, 'GameMode');
             this._settings = ExtensionUtils.getSettings();
 
+            this._gio_settings = new Gio.Settings({
+                schema_id: 'org.gnome.desktop.notifications',
+            });
+
+            /* Store the mode that needs to be returned to when gamemode exits */
+            this._return_dnd_mode = false;
+
             this.connect('destroy', this._onDestroy.bind(this));
 
             let box = new St.BoxLayout({style_class: 'panel-status-menu-box'});
@@ -182,6 +189,9 @@ var GameModeIndicator = GObject.registerClass(
             this._signals = [];
 
             this._client.close();
+
+            this._gio_settings.run_dispose();
+            this._gio_settings = null;
         }
 
         _ensureSource() {
@@ -252,6 +262,15 @@ var GameModeIndicator = GObject.registerClass(
         _onStateChanged(cli, is_on) {
             /* update the icon */
             this._sync();
+
+            if (this._settings.get_boolean('do-not-disturb')) {
+                if (is_on) {
+                    this._return_dnd_mode = this._gio_settings.get_boolean("show-banners");
+                    this._gio_settings.set_boolean("show-banners", false);
+                } else {
+                    this._gio_settings.set_boolean("show-banners", this._return_dnd_mode);
+                }
+            }
 
             if (this._settings.get_boolean('emit-notifications')) {
                 let status = getStatusText(is_on);

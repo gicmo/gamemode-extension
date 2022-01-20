@@ -11,6 +11,11 @@
       <summary>Always show the icon</summary>
       <description>Display the icon even if GameMode is currently not active.</description>
     </key>
+    <key type="b" name="do-not-disturb">
+      <default>false</default>
+      <summary>Do Not Disturb</summary>
+      <description>Disable notification banners when GameMode is active.</description>
+    </key>
     <key type="b" name="active-tint">
       <default>false</default>
       <summary>Active icon tint</summary>
