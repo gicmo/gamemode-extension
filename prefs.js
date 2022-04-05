@@ -6,7 +6,6 @@ const [major] = Config.PACKAGE_VERSION.split('.');
 const shellVersion = Number.parseInt(major);
 
 const {Gdk, Gio, GObject, Gtk} = imports.gi;
-const Lang = imports.lang;
 const Adw = shellVersion >= 42 ? imports.gi.Adw : null;
 
 
