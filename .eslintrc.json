@@ -114,6 +114,6 @@
     "ngettext": false
   },
   "parserOptions": {
-    "ecmaVersion": 2017
+    "ecmaVersion": 2018
   }
 }
