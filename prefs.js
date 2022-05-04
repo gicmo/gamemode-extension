@@ -291,6 +291,7 @@ function fillPreferencesWindow(window) {
     
     main_group.add(new SwitchActionRow({active_key: 'emit-notifications'}));
     main_group.add(new SwitchActionRow({active_key: 'always-show-icon'}));
+    main_group.add(new SwitchActionRow({active_key: 'do-not-disturb'}));
     main_group.add(new ColorActionRow(
         {active_key: 'active-tint', color_key: 'active-color'}));    
     
