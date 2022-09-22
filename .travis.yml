@@ -1,7 +1,6 @@
 dist: jammy
 arch:
   - amd64
-  - arm64
 
 language: node_js
 node_js:
