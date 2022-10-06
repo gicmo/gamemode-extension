@@ -17,13 +17,14 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Language: es\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=3; plural=n == 1 ? 0 : n != 0 && n % 1000000 == 0 ? 1 : 2;\n"
 
 #, javascript-format
 msgid "%d active client"
 msgid_plural "%d active clients"
 msgstr[0] "%d cliente activo"
 msgstr[1] "%d clientes activos"
+msgstr[2] "%d clientes activos"
 
 msgid "Active icon tint"
 msgstr "Color del icono activado"
