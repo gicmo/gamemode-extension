@@ -7,7 +7,11 @@ Shell version 3.34 or greater are required.
 
 ![screenshot][screenshot]
 
-## Installation from source
+## Installation
+
+From [GNOME Extensions website](https://extensions.gnome.org/extension/1852/gamemode/)
+
+## From source
 
 Obtain the current development version of GameMode extension via:
 
