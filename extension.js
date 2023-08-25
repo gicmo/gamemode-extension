@@ -119,6 +119,10 @@ var GameModeIndicator = GObject.registerClass(
             super._init(0.0, 'GameMode');
             this._settings = ExtensionUtils.getSettings();
 
+            this._gio_settings = new Gio.Settings({
+                schema_id: 'org.gnome.desktop.notifications',
+            });
+
             this.connect('destroy', this._onDestroy.bind(this));
 
             let box = new St.BoxLayout({style_class: 'panel-status-menu-box'});
@@ -138,6 +142,10 @@ var GameModeIndicator = GObject.registerClass(
             this._connect(this._settings,
                           'changed::always-show-icon',
                           this._sync.bind(this));
+            
+            this._connect(this._settings,
+                          'changed::do-not-disturb',
+                          this._update_do_not_disturb.bind(this));
 
             this._connect(this._settings,
                           'changed::active-tint',
@@ -158,6 +166,10 @@ var GameModeIndicator = GObject.registerClass(
 
             /* update the icon */
             this._update_active_color(); /* calls this._sync() */
+
+            /* Store the mode that needs to be returned to when gamemode exits */
+            this._return_dnd_mode = this._gio_settings.get_boolean('show-banners');
+            this._update_do_not_disturb();
 
             /* the menu */
             this.menu.addMenuItem(new PopupMenu.PopupSeparatorMenuItem());
@@ -182,6 +194,12 @@ var GameModeIndicator = GObject.registerClass(
             this._signals = [];
 
             this._client.close();
+
+            /* Restore original Do Not Disturb mode before exiting */
+            this._gio_settings.set_boolean('show-banners', this._return_dnd_mode);
+
+            this._gio_settings.run_dispose();
+            this._gio_settings = null;
         }
 
         _ensureSource() {
@@ -248,10 +266,25 @@ var GameModeIndicator = GObject.registerClass(
             this._sync();
         }
 
+        _update_do_not_disturb() {
+            let on = this._client.clientCount > 0;
+            let dnd = this._settings.get_boolean('do-not-disturb');
+
+            /* If DND mode is enabled, and gamemode is active, turn on DND. Else, reset back to the original mode. */
+            if (dnd && on) {
+                this._return_dnd_mode = this._gio_settings.get_boolean('show-banners');
+                this._gio_settings.set_boolean('show-banners', false);
+            } else {
+                this._gio_settings.set_boolean('show-banners', this._return_dnd_mode);
+            }
+        }
+
         /* GameMode.Client callbacks */
         _onStateChanged(cli, is_on) {
             /* update the icon */
             this._sync();
+
+            this._update_do_not_disturb();
 
             if (this._settings.get_boolean('emit-notifications')) {
                 let status = getStatusText(is_on);
@@ -263,7 +296,6 @@ var GameModeIndicator = GObject.registerClass(
 
             this._sync();
         }
-
     });
 
 /* entry points */

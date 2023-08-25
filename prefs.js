@@ -21,6 +21,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             this.margin = 24;
             this.add(this.make_row_switch('emit-notifications'));
             this.add(this.make_row_switch('always-show-icon'));
+            this.add(this.make_row_switch('do-not-disturb'));
             this.add(this.make_row_switch('active-tint', 'active-color'));
         } else {
             this.margin_start = 24;
@@ -29,6 +30,7 @@ var GameModeSettings = GObject.registerClass(class GameModePrefWidget extends Gt
             this.margin_bottom = 24;
             this.append(this.make_row_switch('emit-notifications'));
             this.append(this.make_row_switch('always-show-icon'));
+            this.append(this.make_row_switch('do-not-disturb'));
             this.append(this.make_row_switch('active-tint', 'active-color'));
         }
     }
@@ -289,6 +291,7 @@ function fillPreferencesWindow(window) {
     
     main_group.add(new SwitchActionRow({active_key: 'emit-notifications'}));
     main_group.add(new SwitchActionRow({active_key: 'always-show-icon'}));
+    main_group.add(new SwitchActionRow({active_key: 'do-not-disturb'}));
     main_group.add(new ColorActionRow(
         {active_key: 'active-tint', color_key: 'active-color'}));    
     
