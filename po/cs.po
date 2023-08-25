@@ -2,72 +2,74 @@
 # Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
 # This file is distributed under the same license as the gamemode-extension package.
 # FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
-# 
-#, fuzzy
+#
 msgid ""
 msgstr ""
 "Project-Id-Version: gamemode-extension\n"
 "Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: \n"
+"PO-Revision-Date: \n"
+"Last-Translator: Kryštof Černý <cleerline1mc@gmail.com>\n"
 "Language-Team: Czech (https://www.transifex.com/GameMode/teams/100322/cs/)\n"
+"Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Language: cs\n"
-"Plural-Forms: nplurals=4; plural=(n == 1 && n % 1 == 0) ? 0 : (n >= 2 && n <= 4 && n % 1 == 0) ? 1: (n % 1 != 0 ) ? 2 : 3;\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n>=2 && n<=4 ? 1 : 2);\n"
+"X-Generator: Poedit 3.2.2\n"
 
 #: extension.js:46
 msgid "GameMode is active"
-msgstr ""
+msgstr "Herní režim aktivní"
 
 #: extension.js:49
 msgid "GameMode is off"
-msgstr ""
+msgstr "Herní režim neaktivní"
 
 #: extension.js:103
 msgid "No active clients"
-msgstr ""
+msgstr "Bez aktivních klientů"
 
 #: extension.js:105
 #, javascript-format
 msgid "%d active client"
 msgid_plural "%d active clients"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
+msgstr[0] "%d aktivní klient"
+msgstr[1] "%d aktivní klienti"
+msgstr[2] "%d aktivních klientů"
 
 #: extension.js:257
 msgid "Computer performance is now optimized for playing games"
-msgstr ""
+msgstr "Výkon počítače je nyní optimalizován pro hraní her"
 
 #: extension.js:259
 msgid "Computer performance is reset for normal usage"
-msgstr ""
+msgstr "Výkon počítače je nyní optimalizován pro normální používání"
 
 #: data/settings.gschema.xml:6
 msgid "Notifications"
-msgstr ""
+msgstr "Oznámení"
 
 #: data/settings.gschema.xml:7
 msgid "Emit notifications when the global GameMode status changes."
-msgstr ""
+msgstr "Ukázat notifikaci při změně globálního stavu herního režimu."
 
 #: data/settings.gschema.xml:11
 msgid "Always show the icon"
-msgstr ""
+msgstr "Vždy ukazovat ikonu"
 
 #: data/settings.gschema.xml:12
 msgid "Display the icon even if GameMode is currently not active."
-msgstr ""
+msgstr "Ukazovat ikonu i když herní režim není aktivní."
 
 #: data/settings.gschema.xml:16 data/settings.gschema.xml:21
 msgid "Active icon tint"
-msgstr ""
+msgstr "Zbarvení aktivní ikony"
 
 #: data/settings.gschema.xml:17
 msgid "Tint the icon with a color when GameMode is active."
-msgstr ""
+msgstr "Zbarvit ikonu barvou při aktivním herním režimu."
 
 #: data/settings.gschema.xml:22
 msgid "The color to use tinting the icon."
-msgstr ""
+msgstr "Barva použitá pro zbarvení ikony."
